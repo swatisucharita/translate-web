@@ -1,0 +1,46 @@
+{
+  "name": "translator-web",
+  "version": "1.0.0",
+  "description": "language interpreter",
+  "main": "index.js",
+  "author": "Swati Sucharita",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack -p --config webpack.prod.js",
+    "test": ""
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "clean-webpack-plugin": "^0.1.18",
+    "css-loader": "^0.28.9",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^2.30.1",
+    "style-loader": "^0.20.2",
+    "uglifyjs-webpack-plugin": "^1.2.0",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1",
+    "webpack-merge": "^4.1.1"
+  },
+  "dependencies": {
+    "@google-cloud/speech": "^1.1.0",
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.0",
+    "fs": "^0.0.1-security",
+    "google-translate": "^2.1.0",
+    "google-translate-api": "^2.3.0",
+    "material-ui": "^0.20.0",
+    "node-record-lpcm16": "^0.3.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}
