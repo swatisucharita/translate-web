@@ -30,16 +30,12 @@
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
-    "@google-cloud/speech": "^1.1.0",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.0",
-    "fs": "^0.0.1-security",
-    "google-translate": "^2.1.0",
     "google-translate-api": "^2.3.0",
     "material-ui": "^0.20.0",
-    "node-record-lpcm16": "^0.3.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }

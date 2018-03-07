@@ -10,6 +10,9 @@ const style = {
     translateContainer: {
         display: 'flex',
         justifyContent: 'space-around'
+    },
+    button: {
+        top: '45%'
     }
 };
 
@@ -80,9 +83,8 @@ export default class Translator extends React.Component {
         this.setState({sourceLang, targetLang});
     }
     render(){
-        return <Card>
-            <CardText>
-                <div style={style.translateContainer}>
+        return(
+        <div style={style.translateContainer}>
                     <TranslatorSection 
                         key={'from'}
                         langCode={'lang1'}
@@ -93,9 +95,11 @@ export default class Translator extends React.Component {
                         onStartMic={this.setSourceLang}
                         showSpeaker={this.state.targetLang === 'lang1'}
                     />
-                    <IconButton onClick={this.translateText}>
-                        {this.state.targetLang === 'lang2' ? <RightArrowIcon /> : <LeftArrowIcon />}
-                    </IconButton>
+                    <div>
+                        <IconButton onClick={this.translateText} style={style.button}>
+                            {this.state.targetLang === 'lang2' ? <RightArrowIcon /> : <LeftArrowIcon />}
+                        </IconButton>
+                    </div>
                     <TranslatorSection  
                         key={'to'}
                         langCode={'lang2'}
@@ -106,8 +110,6 @@ export default class Translator extends React.Component {
                         onStartMic={this.setSourceLang}
                         showSpeaker={this.state.targetLang === 'lang2'} 
                     />
-                </div>
-            </CardText>
-        </Card>;
+        </div>);
     }
 }

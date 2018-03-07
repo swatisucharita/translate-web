@@ -17,6 +17,17 @@ const style = {
         height: 120,
         padding: 30,
     },
+    containerCard: {
+        width: '35%',
+        backgroundColor: 'transparent'
+    },
+    textCenter: {
+        textAlign: 'center'
+    },
+    speaker: {
+        top: -50,
+        float: 'right'
+    }
 };
 
 export default class TranslatorSection extends React.Component {
@@ -104,9 +115,9 @@ export default class TranslatorSection extends React.Component {
     }
 
     render(){
-        return (<Card>
+        return (<Card style={style.containerCard}>
             <CardText>
-                <div>
+                <div style={style.textCenter}>
                     <IconButton
                         iconStyle={style.largeIcon}
                         style={style.large}
@@ -121,6 +132,7 @@ export default class TranslatorSection extends React.Component {
                         floatingLabelFixed={true}
                         value={this.props.language}
                         onChange={this.pickLanguage}
+                        fullWidth={true}
                     >
                         {this.languages.map(language => {
                             return <MenuItem id={language.value} value={language.value} primaryText={language.name}/>
@@ -132,16 +144,19 @@ export default class TranslatorSection extends React.Component {
                     <TextField 
                         value={this.props.text}
                         multiLine={true}
+                        rows={2}
+                        fullWidth={true}
                     />
                     {this.props.showSpeaker && 
                         <IconButton
                             onClick={this.toggleSpeaker}
+                            style={style.speaker}
                         >
                             {this.state.speakerEnabled ? <SpeakIcon /> : <MuteIcon />}
                         </IconButton>
                     }
                 </div>
             </CardText>
-        </Card>)
+        </Card>);
     }
 }

@@ -39,7 +39,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
     },
     // static assets
     { test: /\.html$/, loader: 'html-loader' },
-    { test: /\.(png|jpg|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader' }
+    { test: /\.(png|jpg|jpeg|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader' }
     ]
   }
  };
