@@ -53,9 +53,17 @@ export default class Translator extends React.Component {
     }
     setText1(text1){
         this.setState({text1});
+
+        if (this.state.targetLang === 'lang2'){
+            this.translateTo(this.state.lang2, text1);
+        }
     }
     setText2(text2){
         this.setState({text2});
+
+        if (this.state.targetLang === 'lang1'){
+            this.translateTo(this.state.lang1, text2);
+        }
     }
     translateTo(lang, text){
         const {sourceLang, targetLang} = this.state;
@@ -77,6 +85,10 @@ export default class Translator extends React.Component {
     }
     setLang2(lang2){
         this.setState({lang2});
+
+        if (this.state.targetLang === 'lang2'){
+            this.translateTo(lang2, this.state.text2);
+        }
     }
     setSourceLang(sourceLang){
         const targetLang = sourceLang === 'lang1' ? 'lang2' : 'lang1';

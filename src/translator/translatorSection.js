@@ -1,6 +1,7 @@
 import * as React from 'react';
 import interpreter from '../interpreter';
 import {allAvailableLanguages} from '../constants';
+import theme from '../theme';
 
 import { Card, CardText, IconButton, TextField, SelectField, MenuItem } from 'material-ui';
 import MicIcon from 'material-ui/svg-icons/av/mic';
@@ -123,7 +124,7 @@ export default class TranslatorSection extends React.Component {
                         style={style.large}
                         onClick={this.toggleRecording}
                     >
-                        <MicIcon color={this.state.recorderState === 'active' ? 'red' : 'black'} />
+                        <MicIcon color={this.state.recorderState === 'active' ? theme.palette.primary1Color : theme.palette.accent1Color} />
                     </IconButton>
                 </div>
                 <div>
