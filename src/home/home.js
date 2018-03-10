@@ -9,7 +9,7 @@ const style = {
         left: 0,
         position: 'fixed',
         width: '100vw',
-        opacity: 0.6
+        opacity: 0.5
     },
     header: {
         textAlign: 'center',
