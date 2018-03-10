@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { Card, CardText, IconButton } from 'material-ui';
-import RightArrowIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-right';
-import LeftArrowIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
+import { CircularProgress } from 'material-ui';
 
 import interpreter from '../interpreter';
 import TranslatorSection from './translatorSection';
@@ -11,7 +9,7 @@ const style = {
         display: 'flex',
         justifyContent: 'space-around'
     },
-    button: {
+    spinner: {
         top: '45%'
     }
 };
@@ -34,7 +32,8 @@ export default class Translator extends React.Component {
             lang2: 'hi-IN',
             text2:'',
             sourceLang: 'lang1',
-            targetLang: 'lang2'
+            targetLang: 'lang2',
+            loading: false
         };
 
     }
@@ -42,13 +41,17 @@ export default class Translator extends React.Component {
         const {sourceLang, targetLang} = this.state;
         const text = sourceLang === 'lang1' ? this.state.text1 : this.state.text2;
         const lang = this.state[targetLang];
+        this.setState({loading: true});
         interpreter.translate(text, lang).then(result => {
+            this.setState({loading: false});
             const toText = result.text;
             if (sourceLang === 'lang1'){
                 this.setState({text2: toText});
             } else {
                 this.setState({text1: toText});
             }
+        }).catch(err => {
+            this.setState({loading: false});
         });
     }
     setText1(text1){
@@ -67,27 +70,31 @@ export default class Translator extends React.Component {
     }
     translateTo(lang, text){
         const {sourceLang, targetLang} = this.state;
+        this.setState({loading: true});
         interpreter.translate(text, lang).then(result => {
+            this.setState({loading: false});            
             const toText = result.text;
             if (sourceLang === 'lang1'){
                 this.setState({text2: toText});
             } else {
                 this.setState({text1: toText});
             }
+        }).catch(err => {
+            this.setState({loading: false});
         });
     }
     setLang1(lang1){
         this.setState({lang1});
 
         if (this.state.targetLang === 'lang1'){
-            this.translateTo(lang1, this.state.text1);
+            this.translateTo(lang1, this.state.text2);
         }
     }
     setLang2(lang2){
         this.setState({lang2});
 
         if (this.state.targetLang === 'lang2'){
-            this.translateTo(lang2, this.state.text2);
+            this.translateTo(lang2, this.state.text1);
         }
     }
     setSourceLang(sourceLang){
@@ -108,9 +115,7 @@ export default class Translator extends React.Component {
                         showSpeaker={this.state.targetLang === 'lang1'}
                     />
                     <div>
-                        <IconButton onClick={this.translateText} style={style.button}>
-                            {this.state.targetLang === 'lang2' ? <RightArrowIcon /> : <LeftArrowIcon />}
-                        </IconButton>
+                        {this.state.loading && <CircularProgress style={style.spinner} />}
                     </div>
                     <TranslatorSection  
                         key={'to'}
