@@ -20,7 +20,7 @@ const style = {
     },
     containerCard: {
         width: '35%',
-        backgroundColor: 'transparent'
+        backgroundImage: `linear-gradient(to bottom right, #fff, ${theme.palette.primary1Color})`
     },
     textCenter: {
         textAlign: 'center'

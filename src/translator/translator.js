@@ -9,6 +9,13 @@ const style = {
         display: 'flex',
         justifyContent: 'space-around'
     },
+    notSupportedContainer: {
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    info: {
+        color: 'red'
+    },
     spinner: {
         top: '45%'
     }
@@ -18,7 +25,6 @@ export default class Translator extends React.Component {
     constructor(props, context){
         super(props, context);
 
-        this.translateText = this.translateText.bind(this);
         this.translateTo = this.translateTo.bind(this);
         this.setText1 = this.setText1.bind(this);
         this.setText2 = this.setText2.bind(this);
@@ -36,23 +42,6 @@ export default class Translator extends React.Component {
             loading: false
         };
 
-    }
-    translateText(){
-        const {sourceLang, targetLang} = this.state;
-        const text = sourceLang === 'lang1' ? this.state.text1 : this.state.text2;
-        const lang = this.state[targetLang];
-        this.setState({loading: true});
-        interpreter.translate(text, lang).then(result => {
-            this.setState({loading: false});
-            const toText = result.text;
-            if (sourceLang === 'lang1'){
-                this.setState({text2: toText});
-            } else {
-                this.setState({text1: toText});
-            }
-        }).catch(err => {
-            this.setState({loading: false});
-        });
     }
     setText1(text1){
         this.setState({text1});
@@ -102,31 +91,37 @@ export default class Translator extends React.Component {
         this.setState({sourceLang, targetLang});
     }
     render(){
-        return(
-        <div style={style.translateContainer}>
-                    <TranslatorSection 
-                        key={'from'}
-                        langCode={'lang1'}
-                        language={this.state.lang1} 
-                        text={this.state.text1} 
-                        onLanguageChange={this.setLang1} 
-                        onTextChange={this.setText1}
-                        onStartMic={this.setSourceLang}
-                        showSpeaker={this.state.targetLang === 'lang1'}
-                    />
-                    <div>
-                        {this.state.loading && <CircularProgress style={style.spinner} />}
-                    </div>
-                    <TranslatorSection  
-                        key={'to'}
-                        langCode={'lang2'}
-                        language={this.state.lang2} 
-                        text={this.state.text2} 
-                        onLanguageChange={this.setLang2} 
-                        onTextChange={this.setText2}
-                        onStartMic={this.setSourceLang}
-                        showSpeaker={this.state.targetLang === 'lang2'} 
-                    />
+        const translatorSections = <div style={style.translateContainer}>
+            <TranslatorSection 
+                key={'from'}
+                langCode={'lang1'}
+                language={this.state.lang1} 
+                text={this.state.text1} 
+                onLanguageChange={this.setLang1} 
+                onTextChange={this.setText1}
+                onStartMic={this.setSourceLang}
+                showSpeaker={this.state.targetLang === 'lang1'}
+            />
+            <div>
+                {this.state.loading && <CircularProgress style={style.spinner} />}
+            </div>
+            <TranslatorSection  
+                key={'to'}
+                langCode={'lang2'}
+                language={this.state.lang2} 
+                text={this.state.text2} 
+                onLanguageChange={this.setLang2} 
+                onTextChange={this.setText2}
+                onStartMic={this.setSourceLang}
+                showSpeaker={this.state.targetLang === 'lang2'} 
+            />
+        </div>;
+
+        const notSupported = <div style={style.notSupportedContainer}>
+            <h2 style={style.info}>Speech Recognition not supported. Please open in Google Chrome</h2>
+        </div>;
+        return(<div>
+            {interpreter.supportsSpeechRecognition() ? translatorSections : notSupported}
         </div>);
     }
 }
