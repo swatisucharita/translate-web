@@ -1,5 +1,6 @@
 import React from 'react';
 import Translator from '../translator/translator';
+import About from '../about/about';
 
 import background from '../images/background.jpeg';
 
@@ -9,14 +10,14 @@ const style = {
         left: 0,
         position: 'fixed',
         width: '100vw',
-        opacity: 0.5
+        opacity: 0.3
     },
     header: {
         textAlign: 'center',
         color: 'red'
     },
     content: {
-        marginTop: 30
+        margin: '30px 0'
     }
 };
 export default class Home extends React.Component {
@@ -26,6 +27,9 @@ export default class Home extends React.Component {
             <h1 style={style.header}>That which we are capable of feeling, we are capable of saying</h1>
             <div style={style.content}>
                 <Translator />
+            </div>
+            <div>
+                <About />
             </div>
         </div>;
     }
